@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>CAD Project – Network Equilibrium Solver</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <main>
+            <h1>Network Equilibrium Equations Solver</h1>
+            <p class="sub">
+                Enter the branches (start node and end node of each). The solver builds the tie-set or cut-set matrix,
+                solves for branch currents and voltages, and draws the original circuit and the oriented graph.
+            </p>
+
+            <section class="inp">
+                <h2>Branch data</h2>
+                <p class="cap" style="margin: 0 0 8px">
+                    Branch law: VB = ZB(JB + IB) − EB &nbsp;|&nbsp; EB and IB act in the branch direction (from → to).
+                    Node 0 is the reference.
+                </p>
+                <table id="tb"></table>
+                <div class="bar">
+                    <button id="add">+ Branch</button>
+                    <label
+                        >Method:
+                        <select id="m">
+                            <option value="tie">Tie-set (Loop)</option>
+                            <option value="cut">Cut-set (Node-pair)</option>
+                        </select></label
+                    >
+                    <button class="p" id="go">Solve</button>
+                    <button id="ex">Lecture example</button>
+                </div>
+                <p id="msg" class="err"></p>
+            </section>
+
+            <section>
+                <h2>Diagrams</h2>
+                <div class="figs">
+                    <div>
+                        <svg id="c1" viewBox="0 0 560 400" role="img" aria-label="Original circuit"></svg>
+                        <p class="cap">Original circuit (drag any node to move it)</p>
+                    </div>
+                    <div>
+                        <svg id="c2" viewBox="0 0 560 400" role="img" aria-label="Oriented graph"></svg>
+                        <p class="cap">Oriented graph: tree branches are solid, links are dashed</p>
+                    </div>
+                </div>
+                <div id="loops" class="cap"></div>
+            </section>
+
+            <section id="out" hidden>
+                <h2>Solution steps</h2>
+                <div class="inp" id="steps"></div>
+                <h2 style="margin-top: 14px">Final results</h2>
+                <div class="inp" id="res"></div>
+            </section>
+        </main>
+        <script type="module" src="script.js"></script>
+    </body>
+</html>
